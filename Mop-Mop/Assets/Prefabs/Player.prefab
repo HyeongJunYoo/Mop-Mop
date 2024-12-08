@@ -11,12 +11,9 @@ GameObject:
   - component: {fileID: 2731976886217892081}
   - component: {fileID: 5597213977071352776}
   - component: {fileID: 1857478387472691937}
-  - component: {fileID: 2355172125145399671}
   - component: {fileID: 8206117793549277440}
   - component: {fileID: 2302785169726317145}
-  - component: {fileID: 4461354504507553964}
   - component: {fileID: 6664246126108962422}
-  - component: {fileID: 3924302214650399473}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -95,18 +92,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &2355172125145399671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1526916694944759060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad367d35aa540ad4286f474c70ac96d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8206117793549277440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6260342d3fe098d4ea1b10085cda70cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 2302785169726317145}
+  enemyDetector: {fileID: 6664246126108962422}
   playerRenderer: {fileID: 7824624469498912497}
 --- !u!114 &2302785169726317145
 MonoBehaviour:
@@ -132,18 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d870130b9f047478d82b923204dd83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4461354504507553964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1526916694944759060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43875e9c818ea354d917ed493e35d39a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6664246126108962422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,18 +129,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 702e162d9562a974b86527d3215362b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3924302214650399473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1526916694944759060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 981a8454bebfafb4e86dba5bee849c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7788530698768158038

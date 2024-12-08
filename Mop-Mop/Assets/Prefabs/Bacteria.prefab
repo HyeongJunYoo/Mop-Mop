@@ -13,10 +13,8 @@ GameObject:
   - component: {fileID: 4707653423135345862}
   - component: {fileID: 1388758115369414139}
   - component: {fileID: 1512438829850732660}
-  - component: {fileID: 6445082705556596820}
   - component: {fileID: 9169676202404663509}
   - component: {fileID: 1261145084417233408}
-  - component: {fileID: 4833135292517473425}
   m_Layer: 7
   m_Name: Bacteria
   m_TagString: Untagged
@@ -135,18 +133,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6445082705556596820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803592283616026326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4037341b3452c9b4f98eaffddb6eaa2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &9169676202404663509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 065bb3f8c16873f49bc534e3a1816e95, type: 2}
+  navMeshAgent: {fileID: 1512438829850732660}
   playerRenderer: {fileID: 4707653423135345862}
 --- !u!114 &1261145084417233408
 MonoBehaviour:
@@ -174,15 +161,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRenderer: {fileID: 4707653423135345862}
---- !u!114 &4833135292517473425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803592283616026326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0952e53af267b444bad346ed277308d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

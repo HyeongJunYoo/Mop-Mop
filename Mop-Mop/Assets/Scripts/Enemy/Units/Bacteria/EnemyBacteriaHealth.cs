@@ -15,7 +15,6 @@ namespace Enemy.Units.Bacteria
             IsDamaged = false;
         }
         
-        
         public void TakeDamage(int damage)
         {
             _currentHp -= damage;
@@ -52,11 +51,6 @@ namespace Enemy.Units.Bacteria
             enemyRenderer.material.color = color;
             await UniTask.WaitForSeconds(0.05f, cancellationToken: token);
             enemyRenderer.material.color = Color.white;
-        }
-        
-        public void ChangeColor(Color color)
-        {
-            enemyRenderer.material.color = color;
         }
 #endif
     }

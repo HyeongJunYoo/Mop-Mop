@@ -1,47 +1,64 @@
+using Interface;
 using Stateless;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerStateMachine : MonoBehaviour
+    public class PlayerStateMachine
     {
-        public enum State { Idle, Move, Attack } 
+        private enum State { Idle, Move, Attack } 
         public enum Trigger { StartMoving, StopMoving, StartAttack, StopAttack }
+        private readonly StateMachine<State, Trigger> _stateMachine;
 
-        private StateMachine<State, Trigger> _stateMachine;
-        private void Awake()
+        private IState CurrentState { get; set; }
+        private readonly PlayerIdleState _idleState;
+        private readonly PlayerMoveState _moveState;
+        private readonly PlayerAttackState _attackState;
+        
+        public PlayerStateMachine(PlayerController player)
         {
+            _idleState = new PlayerIdleState(player);
+            _moveState = new PlayerMoveState(player);
+            _attackState = new PlayerAttackState(player);
+            CurrentState = _idleState;
+            
             _stateMachine = new StateMachine<State, Trigger>(State.Idle);
-        }
-
-        private void Start()
-        {
             _stateMachine.Configure(State.Idle)
-                .OnEntry(()=> Debug.Log("Entering Idle State"))
-                .OnExit(()=> Debug.Log("Exiting Idle State"))
                 .Permit(Trigger.StartMoving, State.Move)
                 .Permit(Trigger.StartAttack, State.Attack);
 
             _stateMachine.Configure(State.Move)
-                .OnEntry(() => Debug.Log("Entering Move State"))
-                .OnExit(() => Debug.Log("Exiting Move State"))
                 .Permit(Trigger.StopMoving, State.Idle);
             
             _stateMachine.Configure(State.Attack)
-                .OnEntry(()=> Debug.Log("Entering Attack State"))
-                .OnExit(()=> Debug.Log("Exiting Attack State"))
                 .Permit(Trigger.StartMoving, State.Move)
                 .Permit(Trigger.StopAttack, State.Idle);
         }
-
+        
         public void ChangeState(Trigger trigger)
         {
-            if (_stateMachine.CanFire(trigger))
+            if (!_stateMachine.CanFire(trigger)) return;
+            
+            CurrentState?.Exit();
+            _stateMachine.Fire(trigger);
+            CurrentState = _stateMachine.State switch
             {
-                _stateMachine.Fire(trigger);
-            }
+                State.Idle => _idleState,
+                State.Move => _moveState,
+                State.Attack => _attackState,
+                _ => null
+            };
+            CurrentState?.Enter();
         }
         
-        public State CurrentState => _stateMachine.State;
+        public void Update()
+        {
+            CurrentState?.Update();
+        }
+        
+        public void FixedUpdate()
+        {
+            CurrentState?.FixedUpdate();
+        }
     }
 }

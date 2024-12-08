@@ -1,12 +1,14 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Enemy.Interface;
+using Interface;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerAttack : MonoBehaviour
+    public class PlayerAttackState : IState
     {
+        private PlayerController _player;
         public float AttackCooldown { get; private set; }
         public float ReloadTime { get; private set; }
         public int Damage { get; private set; }
@@ -17,11 +19,13 @@ namespace Player
         public bool IsAttacking { get; private set; }
         public bool IsReloading { get; private set; }
 
-        private void Start()
+        public PlayerAttackState(PlayerController player)
         {
+            _player = player;
+            
             AttackCooldown = 1f;
             ReloadTime = 2.0f;
-            Damage = 5;
+            Damage = 10;
             TotalAmmo = 10;
             CurrentAmmo = TotalAmmo;
             
@@ -29,7 +33,28 @@ namespace Player
             IsReloading = false;
         }
         
-        public void Attack(GameObject target)
+        public void Enter()
+        {
+            _player.ChangeColor(Color.red);
+        }
+
+        public void Update()
+        {
+            Attack(_player.enemyDetector.GetClosestEnemy());
+        }
+
+        public void FixedUpdate()
+        {
+            
+        }
+
+        public void Exit()
+        {
+            
+        }
+
+
+        private void Attack(GameObject target)
         {
             if (target == null) return;
             
