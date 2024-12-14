@@ -6,16 +6,17 @@ namespace Player
     public class PlayerMoveState : IState
     {
         private readonly PlayerController _player;
+        private readonly LayerMask _obstacleLayer;
         private Vector3 _lastFixedPosition;
         private Vector3 _nextFixedPosition;
         private Vector3 _velocity;
         
-        private const float RayDistance = 0.65f;
         private const float Speed = 5.0f;
         
         public PlayerMoveState(PlayerController player)
         {
             _player = player;
+            _obstacleLayer = LayerMask.GetMask("Wall", "Enemy");
         }
         
         public void Enter()
@@ -44,9 +45,6 @@ namespace Player
             var moveDirection = Vector3.Lerp(_lastFixedPosition, _nextFixedPosition, interpolationAlpha) -
                                 _player.transform.position;
             _player.CharacterController.Move(moveDirection);
-            
-            if(_player.CharacterController.velocity.magnitude < 0.1f)
-                _nextFixedPosition = _player.transform.position;
         }
 
         private void CalculateNextFixedPosition(Vector2 moveInput)
@@ -60,12 +58,21 @@ namespace Player
             // 이동 방향을 y축을 제외한 방향으로 설정합니다.
             _velocity = new Vector3(planeVelocity.x, 0, planeVelocity.z);
             
-            _nextFixedPosition += _velocity * Time.fixedDeltaTime;
+            var targetPosition = _nextFixedPosition + _velocity * Time.fixedDeltaTime;
             
+            // 실제 이동 가능 여부를 체크 (충돌 등을 고려)
+            if (CanMoveToNextPosition(targetPosition))
+                _nextFixedPosition = targetPosition;
+            else
+                _nextFixedPosition = _player.CharacterController.transform.position + _velocity * Time.fixedDeltaTime;
+
             Debug.Log(_nextFixedPosition);
         }
         
-        
+        private bool CanMoveToNextPosition(Vector3 targetPosition)
+        {
+            return !Physics.CheckCapsule(_lastFixedPosition, targetPosition, 0.5f, _obstacleLayer);
+        }
         
         /// <summary>
         /// 대각선 이동에서도 일정한 속도로 이동하기 위해 x, z축의 속도를 계산합니다.
