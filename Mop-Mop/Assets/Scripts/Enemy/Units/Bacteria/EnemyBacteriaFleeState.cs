@@ -1,4 +1,3 @@
-using Enemy.Interface;
 using Interface;
 using Manager;
 using UnityEngine;
@@ -13,6 +12,7 @@ namespace Enemy.Units.Bacteria
         public EnemyBacteriaFleeState(BaseEnemy enemy)
         {
             _enemy = (EnemyBacteriaController)enemy;
+            SetSpeed(_enemy.EnemyData.speed);
         }
         
         public void Enter()
@@ -22,7 +22,7 @@ namespace Enemy.Units.Bacteria
 
         public void Update()
         {
-            Flee();
+            Move();
         }
 
         public void FixedUpdate()
@@ -35,7 +35,7 @@ namespace Enemy.Units.Bacteria
             
         }
 
-        public void Flee()
+        public void Move()
         {
             // 플레이어의 위치를 가져옴
             var playerTransform = PlayerManager.Instance.PlayerTransform;

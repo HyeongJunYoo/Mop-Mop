@@ -39,6 +39,7 @@ namespace Enemy.Units.Bacteria
         
         private void Initialize()
         {
+            _stateMachine.ChangeState(EnemyStateMachine.Trigger.StartMoving);
             _health.SetHp(EnemyData.health);
         }
         
@@ -56,9 +57,8 @@ namespace Enemy.Units.Bacteria
         
         private void HandleStateTransition()
         {
-            if(_health.IsDamaged)
-                _stateMachine.ChangeState(EnemyStateMachine.Trigger.Damaged);
-            
+            // if(_health.IsDamaged)
+            //     _stateMachine.ChangeState(EnemyStateMachine.Trigger.Damaged);
         }
         
     }

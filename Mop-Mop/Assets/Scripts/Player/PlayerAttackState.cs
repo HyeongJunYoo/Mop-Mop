@@ -1,6 +1,5 @@
 using System;
 using Cysharp.Threading.Tasks;
-using Enemy.Interface;
 using Interface;
 using UnityEngine;
 

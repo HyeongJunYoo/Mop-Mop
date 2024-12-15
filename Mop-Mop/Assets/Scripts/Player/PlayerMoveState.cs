@@ -13,10 +13,11 @@ namespace Player
         
         private const float Speed = 5.0f;
         
+        
         public PlayerMoveState(PlayerController player)
         {
             _player = player;
-            _obstacleLayer = LayerMask.GetMask("Wall", "Enemy");
+            _obstacleLayer = LayerMask.GetMask("Wall");
         }
         
         public void Enter()

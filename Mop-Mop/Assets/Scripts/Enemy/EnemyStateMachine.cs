@@ -1,7 +1,6 @@
 using Enemy.Units.Bacteria;
 using Interface;
 using Stateless;
-using UnityEngine;
 
 namespace Enemy
 {
@@ -13,11 +12,13 @@ namespace Enemy
         
         private IState CurrentState { get; set; }
         private readonly EnemyBacteriaIdleState _idleState;
+        private readonly EnemyBacteriaMoveState _moveState;
         private readonly EnemyBacteriaFleeState _fleeState;
         
         public EnemyStateMachine(BaseEnemy enemy)
         {
             _idleState = new EnemyBacteriaIdleState(enemy);
+            _moveState = new EnemyBacteriaMoveState(enemy);
             _fleeState = new EnemyBacteriaFleeState(enemy);
             CurrentState = _idleState;
             
@@ -44,7 +45,7 @@ namespace Enemy
             CurrentState = _stateMachine.State switch
             {
                 State.Idle => _idleState,
-                State.Move => null,
+                State.Move => _moveState,
                 State.Flee => _fleeState,
                 _ => null
             };

@@ -1,6 +1,6 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Enemy.Interface;
+using Interface;
 using UnityEngine;
 
 namespace Enemy.Units.Bacteria

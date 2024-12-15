@@ -1,4 +1,4 @@
-namespace Enemy.Interface
+namespace Interface
 {
     public interface IDamageable
     {

@@ -1,8 +1,8 @@
-namespace Enemy.Interface
+namespace Interface
 {
     public interface IMovable
     { 
-        public void Flee();
+        public void Move();
 
         public void SetSpeed(float speed);
     }
